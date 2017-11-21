@@ -1,0 +1,31 @@
+<resources>
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
+    <string name="app_name">Citas</string>
+
+    <string name="title_activity_referencia">ReferenciaActivity</string>
+    <string name="hint_username">Nombre de usuario</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="text_button_login">LOGIN</string>
+    <string name="title_activity_perfil">PerfilActivity</string>
+    <string name="form_patients">Registro Paciente</string>
+
+    <string name="cedula_p">Cedula</string>
+    <string name="nombre_p">Nombre</string>
+    <string name="apellido_p">Apellido</string>
+    <string name="telefono_p">Telefono</string>
+    <string name="fecha_n_p">Fecha de Nacimiento</string>
+
+    <string name="especialidad_m">Especialidad</string>
+    <string name="buttonE">Enviar</string>
+
+    <string name="paciente">Paciente</string>
+    <string name="medico">Medico</string>
+    <string name="calendar_date_picker_result_values">Year: %1$s\nMonth: %2$s\nDay: %3$s</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

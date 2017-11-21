@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/perfil"
+            android:icon="@drawable/ic_person_black_48dp"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/usuario"
+            android:icon="@drawable/ic_group_add_black_48dp"
+            android:title="Usuario" />
+        <item
+            android:id="@+id/recepcionista"
+            android:icon="@drawable/ic_contact_phone_black_48dp"
+            android:title="Recepcionista" />
+        <item
+            android:id="@+id/medico"
+            android:icon="@drawable/ic_card_membership_black_48dp"
+            android:title="Medico" />
+        <item
+            android:id="@+id/paciente"
+            android:icon="@drawable/ic_wc_black_48dp"
+            android:title="Paciente" />
+        <item
+            android:id="@+id/citam"
+            android:icon="@drawable/ic_content_paste_black_48dp"
+            android:title="Cita Medica" />
+        <item
+            android:id="@+id/proced"
+            android:icon="@drawable/ic_local_hospital_black_48dp"
+            android:title="Procedimiento" />
+        <item
+            android:id="@+id/reporte"
+            android:icon="@drawable/ic_local_library_black_48dp"
+            android:title="Reportes" />
+    </group>
+
+   <!-- <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>-->
+
+</menu>
