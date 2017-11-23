@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,18 +24,25 @@ import com.dba_leidy.citas.fragments.f_cita;
 import com.dba_leidy.citas.fragments.f_medico;
 import com.dba_leidy.citas.fragments.f_paciente;
 import com.dba_leidy.citas.fragments.f_perfil;
+import com.dba_leidy.citas.fragments.f_recepcionista;
+import com.dba_leidy.citas.fragments.f_usuario;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 public class PerfilActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+
     TextView cedula;
     TextView nombre;
+    int positionP = -1;
     private Bundle sesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,6 +63,17 @@ public class PerfilActivity extends AppCompatActivity
         this.sesion = getIntent().getExtras();
         displaySelectedScreen(R.id.perfil);
 
+
+       /* rol = (MaterialBetterSpinner) findViewById(R.id.rol);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, SPINNERLIST);
+
+        rol.setAdapter(arrayAdapter);
+        rol.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                positionP = position;
+            }
+        });*/
 
     }
 
@@ -131,6 +151,14 @@ public class PerfilActivity extends AppCompatActivity
         switch (itemId) {
             case R.id.perfil:
                 fragment = new f_perfil();
+                fragment.setArguments(bundle);
+                break;
+            case R.id.usuario:
+                fragment = new f_usuario();
+                fragment.setArguments(bundle);
+                break;
+            case R.id.recepcionista:
+                fragment = new f_recepcionista();
                 fragment.setArguments(bundle);
                 break;
             case R.id.paciente:

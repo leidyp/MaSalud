@@ -10,11 +10,19 @@
     <string name="title_activity_perfil">PerfilActivity</string>
     <string name="form_patients">Registro Paciente</string>
 
+    <string name="nombre">Nombre</string>
+    <string name="user">Usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="rol">Rol</string>
+
     <string name="cedula_p">Cedula</string>
     <string name="nombre_p">Nombre</string>
     <string name="apellido_p">Apellido</string>
-    <string name="telefono_p">Telefono</string>
     <string name="fecha_n_p">Fecha de Nacimiento</string>
+    <string name="direccion_p">Direccion</string>
+    <string name="telefono_p">Telefono</string>
+    <string name="correo_p">Correo Electronico</string>
+
 
     <string name="especialidad_m">Especialidad</string>
     <string name="buttonE">Enviar</string>
