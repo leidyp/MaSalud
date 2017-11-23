@@ -56,15 +56,16 @@
                     android:hint="@string/apellido_p" />
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/fechanr"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/fechanr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/fecha_n_p" />
-            </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/button1"
+                android:layout_below="@+id/textView2"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:paddingLeft="5dp"
+                android:text="@string/fecha_n_p"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

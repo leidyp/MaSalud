@@ -68,7 +68,7 @@
                 android:layout_marginTop="@dimen/fab_margin"
                 android:paddingLeft="5dp"
                 android:text="@string/fecha_n_p"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <Button
                 android:id="@+id/insert_patient"
