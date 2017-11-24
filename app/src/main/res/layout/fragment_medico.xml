@@ -96,6 +96,15 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/correo_p" />
             </android.support.design.widget.TextInputLayout>
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/especialidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:textColorHint="@color/TextColor"
+                app:met_floatingLabel="highlight"
+                android:hint="@string/especialidad" />
             <Button
                 android:id="@+id/insert_usuario"
                 android:layout_width="match_parent"

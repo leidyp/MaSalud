@@ -34,8 +34,9 @@ public class f_medico extends Fragment implements CalendarDatePickerDialogFragme
     Crud c;
 
     String[] SPINNERLIST = {"User1", "User2", "User3"};
-
+    String[] SPINNERLISTE = {"Medicina General", "Cardiología", "Hematología", "Neurología", "Pediatría"};
     MaterialBetterSpinner usuar;
+    MaterialBetterSpinner espec;
     int positionP = -1;
 
     @Nullable
@@ -53,11 +54,22 @@ public class f_medico extends Fragment implements CalendarDatePickerDialogFragme
         usuar = (MaterialBetterSpinner) getView().findViewById(R.id.usuariom);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, SPINNERLIST);
 
+        espec = (MaterialBetterSpinner) getView().findViewById(R.id.especialidad);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, SPINNERLISTE);
+
         dateView = (TextView) getView().findViewById(R.id.fechanm);
         c = new Crud(getContext());
 
         usuar.setAdapter(arrayAdapter);
         usuar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                positionP = position;
+            }
+        });
+
+        espec.setAdapter(arrayAdapter1);
+        espec.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 positionP = position;

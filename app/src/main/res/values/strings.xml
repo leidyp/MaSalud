@@ -22,6 +22,10 @@
     <string name="direccion_p">Direccion</string>
     <string name="telefono_p">Telefono</string>
     <string name="correo_p">Correo Electronico</string>
+    <string name="especialidad">Especialidad</string>
+    <string name="medicoCabecera">Medico de Cabecera</string>
+    <string name="tipoSangre">Tipo de Sangre</string>
+
 
 
     <string name="especialidad_m">Especialidad</string>

@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import com.codetroopers.betterpickers.calendardatepicker.MonthAdapter.CalendarDa
 import com.dba_leidy.citas.Crud;
 import com.dba_leidy.citas.R;
 import com.dba_leidy.citas.clases_base.paciente;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Calendar;
 
@@ -46,6 +49,12 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
     String tel;
     Crud c;
 
+    String[] SPINNERLIST = {"Medico1", "Medico2", "Medico3"};
+    String[] SPINNERLISTS = {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
+    MaterialBetterSpinner medC;
+    MaterialBetterSpinner TipoS;
+    int positionP = -1;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,6 +67,28 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        medC = (MaterialBetterSpinner) getView().findViewById(R.id.medicoc);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, SPINNERLIST);
+
+        medC.setAdapter(arrayAdapter);
+        medC.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                positionP = position;
+            }
+        });
+
+        TipoS = (MaterialBetterSpinner) getView().findViewById(R.id.tiposangre);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, SPINNERLISTS);
+
+        TipoS.setAdapter(arrayAdapter1);
+        TipoS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                positionP = position;
+            }
+        });
 
         dateView = (TextView)getView().findViewById(R.id.fechan);
         button = (Button)getView().findViewById(R.id.insert_patient);
