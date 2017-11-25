@@ -33,9 +33,6 @@ public class f_recepcionista extends Fragment implements CalendarDatePickerDialo
     private int year, month, day;
     Crud c;
 
-    String[] SPINNERLIST = {"User1", "User2", "User3"};
-
-    MaterialBetterSpinner usuar;
     int positionP = -1;
 
     @Nullable
@@ -50,19 +47,10 @@ public class f_recepcionista extends Fragment implements CalendarDatePickerDialo
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        usuar = (MaterialBetterSpinner) getView().findViewById(R.id.usuar);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, SPINNERLIST);
 
         dateView = (TextView) getView().findViewById(R.id.fechanr);
         c = new Crud(getContext());
 
-        usuar.setAdapter(arrayAdapter);
-        usuar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                positionP = position;
-            }
-        });
         getActivity().setTitle("Registro Recepcionistas");
 
         dateView.setOnClickListener(new View.OnClickListener() {

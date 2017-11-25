@@ -1,12 +1,9 @@
 package com.dba_leidy.citas;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,18 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dba_leidy.citas.fragments.f_cita;
 import com.dba_leidy.citas.fragments.f_medico;
 import com.dba_leidy.citas.fragments.f_paciente;
 import com.dba_leidy.citas.fragments.f_perfil;
 import com.dba_leidy.citas.fragments.f_recepcionista;
-import com.dba_leidy.citas.fragments.f_usuario;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 public class PerfilActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -151,10 +143,6 @@ public class PerfilActivity extends AppCompatActivity
         switch (itemId) {
             case R.id.perfil:
                 fragment = new f_perfil();
-                fragment.setArguments(bundle);
-                break;
-            case R.id.usuario:
-                fragment = new f_usuario();
                 fragment.setArguments(bundle);
                 break;
             case R.id.recepcionista:
