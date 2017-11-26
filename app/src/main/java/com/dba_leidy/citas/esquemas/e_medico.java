@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 
 public class e_medico {
 
-    public static abstract class MedicoData implements BaseColumns {
+   /* public static abstract class MedicoData implements BaseColumns {
         public static final String TABLE_NAME ="medico";
 
         public static final String MED_ID = "med_id";
@@ -18,5 +18,5 @@ public class e_medico {
         public static final String MED_TELEFONO = "med_telefono";
         public static final String MED_FECHA_N = "med_fecha_n";
         public static final String MED_OCUPACION = "med_ocupacion";
-    }
+    }*/
 }

@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 
 public class e_cita {
-    public static abstract class CitaData implements BaseColumns {
+    /*public static abstract class CitaData implements BaseColumns {
         public static final String TABLE_NAME ="cita";
 
         public static final String CITA_ID = "cita_id";
@@ -15,5 +15,5 @@ public class e_cita {
         public static final String PAC_ID = "pac_id";
         public static final String CITA_FECHA = "cita_fecha";
         public static final String MED_OCUPACION = "med_ocupacion";
-    }
+    }*/
 }

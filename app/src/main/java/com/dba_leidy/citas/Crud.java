@@ -1,19 +1,28 @@
 package com.dba_leidy.citas;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import com.dba_leidy.citas.clases_base.constantes;
 import com.dba_leidy.citas.clases_base.paciente;
 import com.dba_leidy.citas.clases_base.usuario;
-import com.dba_leidy.citas.esquemas.*;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 
 /**
  * Created by DBA-Leidy on 8/11/2017.
@@ -21,14 +30,78 @@ import java.util.ArrayList;
 
 public class Crud {
     private Context context;
-
+    boolean estado = false;
     public Crud(){}
 
     public Crud(Context context){
         this.context=context;
     }
 
-    public void LeerUsuario(){
+    public void iniciarSesion(String usuario,String password) {
+
+        OkHttpClient client = new OkHttpClient();
+        Log.i("LOGIN: ", "iinicio");
+        String url = constantes.URLAPI+"login?user="+usuario+"&password="+password;
+        //String url = "https://raw.github.com/square/okhttp/master/README.md" ;
+        Log.i("LOGINURL: ", url);
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Log.i("LOGINR: ", "iinicio");
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Log.i("LOGINR: ", ""+response.body().string());
+                    // Response response = client.newCall(request).execute();
+                    String json = response.body().string();
+                    Log.i("LOGINR: ", json);
+                    try {
+                        JSONObject object = new JSONObject(json);
+                        if (object.getString("status").equals("success")){
+                            constantes.TOKEN = object.getString("status");
+                            Intent intent = new Intent(context, PerfilActivity.class);
+                            //intent.putExtra("cedula",usuario.getUs_cedula());
+                            intent.putExtra("nombre","");
+                            intent.putExtra("user","");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            context.startActivity(intent);
+                        }
+                        else {
+                            Activity activity = (Activity) context;
+                            activity.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    AlertDialog.Builder builder =
+                                            new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                    builder.setTitle("Alerta");
+                                    builder.setMessage("Usuario o Contraseña incorrectos.");
+                                    builder.setPositiveButton("OK", null);
+                                    builder.show();
+                                }
+                            });
+                        }
+                    }
+                    catch(JSONException e){
+
+                    }
+                }
+            }
+        });
+        Log.i("LOGIN: ", "fin");
+    }
+
+
+
+
+    /*public void LeerUsuario(){
 
         ConexionBD mDbHelper = new ConexionBD(this.context);
         SQLiteDatabase db1 = mDbHelper.getReadableDatabase();
@@ -50,9 +123,9 @@ public class Crud {
              Log.i("---> BcountE: ", "Ya existe el usuario");
          }
         c.close();
-    }
+    }*/
 
-    public void InsertarUsuario(){
+   /* public void InsertarUsuario(){
         ConexionBD mDbHelper = new ConexionBD(this.context);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
@@ -66,9 +139,9 @@ public class Crud {
             long rowID = db.insert(e_usuario.UsuarioData.TABLE_NAME, null, cv);
 
         db.close();
-    }
+    }*/
 
-    public usuario ValidarLogin(String user, String password){
+   /* public usuario ValidarLogin(String user, String password){
 
         usuario usua = new usuario();
         ConexionBD mDbHelper = new ConexionBD(this.context);
@@ -97,7 +170,7 @@ public class Crud {
 
     public String LeerPaciente(paciente pacc){
 
-      /*  String alerta= "";
+      *//*  String alerta= "";
         ConexionBD mDbHelper = new ConexionBD(this.context);
         SQLiteDatabase db1 = mDbHelper.getReadableDatabase();
         String[] projection = {
@@ -122,21 +195,21 @@ public class Crud {
             alerta="Paciente existente, ingrese otro.";
             Log.i("--->paciente: ", "Ya existe el paciente");
         }
-        c.close();*/
+        c.close();*//*
         return null;
-    }
+    }*/
 
-    public boolean InsertarPaciente(paciente pacc){
+   /* public boolean InsertarPaciente(paciente pacc){
         boolean alert = true;
         ConexionBD mDbHelper = new ConexionBD(this.context);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         try{
             ContentValues cv = new ContentValues();
-           /* cv.put(e_paciente.PacienteData.PAC_CEDULA, pacc.getPac_cedula());
+           *//* cv.put(e_paciente.PacienteData.PAC_CEDULA, pacc.getPac_cedula());
             cv.put(e_paciente.PacienteData.PAC_NOMBRE, pacc.getPac_nombre());
             cv.put(e_paciente.PacienteData.PAC_APELLIDO, pacc.getPac_apellido());
             cv.put(e_paciente.PacienteData.PAC_TELEFONO, pacc.getPac_telefono());
-            cv.put(e_paciente.PacienteData.PAC_FECHA_N, pacc.getPac_fecha_n());*/
+            cv.put(e_paciente.PacienteData.PAC_FECHA_N, pacc.getPac_fecha_n());*//*
             long rowID = db.insert(e_paciente.PacienteData.TABLE_NAME, null, cv);
         }
         catch (Exception e){
@@ -145,7 +218,8 @@ public class Crud {
 
         db.close();
         return alert;
-    }
+    }*/
+
 
 }
 

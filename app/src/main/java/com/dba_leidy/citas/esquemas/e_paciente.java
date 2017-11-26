@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 
 public class e_paciente {
 
-    public static abstract class PacienteData implements BaseColumns {
+   /* public static abstract class PacienteData implements BaseColumns {
         public static final String TABLE_NAME ="paciente";
 
         public static final String PAC_ID = "pac_id";
@@ -31,5 +31,5 @@ public class e_paciente {
 
         public static final String SQL_DELETE_ENTRIES =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
-    }
+    }*/
 }

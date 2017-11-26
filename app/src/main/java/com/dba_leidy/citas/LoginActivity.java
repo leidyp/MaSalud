@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.dba_leidy.citas.clases_base.constantes;
 import com.dba_leidy.citas.clases_base.usuario;
 
 
@@ -20,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = new Crud(this);
-        db.LeerUsuario();
+        // db.LeerUsuario();
 
         user = (EditText) findViewById(R.id.username);
         pass = (EditText) findViewById(R.id.password);
@@ -29,31 +30,44 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
+    public void x(){
 
+    }
 
     public void ValidateLogin(View view) {
+        Log.i("---> Bcountlo: ", "entro");
+        Log.i("---> Bcountlo: ", ""+ constantes.URLAPI);
         String usua = user.getText().toString().trim();
         String contrasena = pass.getText().toString().trim();
         usuario usuario;
         if (!usua.equals("") && !contrasena.equals("")) {
-            usuario = db.ValidarLogin(usua,contrasena);
-            Log.i("---> Bcountlo: ", ""+usuario.getUs_user());
-            if (usua.equals(usuario.getUs_user()) && contrasena.equals(usuario.getUs_password())) {
+            db.iniciarSesion(usua,contrasena);
+           /* if (estado){
+                Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
+                //intent.putExtra("cedula",usuario.getUs_cedula());
+                intent.putExtra("nombre","");
+                intent.putExtra("user","");
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }*/
+            //usuario = db.ValidarLogin(usua,contrasena);
+            //Log.i("---> Bcountlo: ", ""+usuario.getUs_user());
+            /*if (usua.equals(usuario.getUs_user()) && contrasena.equals(usuario.getUs_password())) {
                 Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
                 //intent.putExtra("cedula",usuario.getUs_cedula());
                 intent.putExtra("nombre",usuario.getUs_nombre());
                 intent.putExtra("user",usuario.getUs_user());
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                startActivity(intent);*/
 
-            } else {
+           /* else {
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
                 builder.setTitle("Alerta");
                 builder.setMessage("Usuario o Contraseña incorrectos.");
                 builder.setPositiveButton("OK", null);
                 builder.show();
-            }
+            }*/
         } else {
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);

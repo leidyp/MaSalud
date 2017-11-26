@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 
 public class e_usuario {
-    public static abstract class UsuarioData implements BaseColumns {
+    /*public static abstract class UsuarioData implements BaseColumns {
 
         public static final String TABLE_NAME ="usuario";
 
@@ -30,6 +30,6 @@ public class e_usuario {
         public static final String SQL_DELETE_ENTRIES =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-    }
+    }*/
 
 }

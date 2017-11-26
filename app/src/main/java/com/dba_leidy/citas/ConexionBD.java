@@ -1,18 +1,12 @@
 package com.dba_leidy.citas;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import com.dba_leidy.citas.esquemas.*;
 
 /**
  * Created by DBA-Leidy on 10/11/2017.
  */
 
-public class ConexionBD extends SQLiteOpenHelper {
-    // If you change the database schema, you must increment the database version.
+public class ConexionBD  {
+   /* // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "salud.db";
 
@@ -24,7 +18,7 @@ public class ConexionBD extends SQLiteOpenHelper {
         db.execSQL(e_usuario.UsuarioData.SQL_CREATE_ENTRIES);
         db.execSQL(e_paciente.PacienteData.SQL_CREATE_ENTRIES);
 
-        Log.i("------","registro todo");
+        Log.i("------","registro
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
@@ -34,6 +28,6 @@ public class ConexionBD extends SQLiteOpenHelper {
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-    }
+    }*/
 }
 
