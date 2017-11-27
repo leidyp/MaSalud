@@ -30,9 +30,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
-    public void x(){
-
-    }
 
     public void ValidateLogin(View view) {
         Log.i("---> Bcountlo: ", "entro");
@@ -42,32 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         usuario usuario;
         if (!usua.equals("") && !contrasena.equals("")) {
             db.iniciarSesion(usua,contrasena);
-           /* if (estado){
-                Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
-                //intent.putExtra("cedula",usuario.getUs_cedula());
-                intent.putExtra("nombre","");
-                intent.putExtra("user","");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }*/
-            //usuario = db.ValidarLogin(usua,contrasena);
-            //Log.i("---> Bcountlo: ", ""+usuario.getUs_user());
-            /*if (usua.equals(usuario.getUs_user()) && contrasena.equals(usuario.getUs_password())) {
-                Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
-                //intent.putExtra("cedula",usuario.getUs_cedula());
-                intent.putExtra("nombre",usuario.getUs_nombre());
-                intent.putExtra("user",usuario.getUs_user());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);*/
-
-           /* else {
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-                builder.setTitle("Alerta");
-                builder.setMessage("Usuario o Contraseña incorrectos.");
-                builder.setPositiveButton("OK", null);
-                builder.show();
-            }*/
         } else {
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);

@@ -26,7 +26,7 @@ import com.dba_leidy.citas.clases_base.paciente;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Calendar;
-
+import com.dba_leidy.citas.clases_base.constantes;
 /**
  * Created by DBA-Leidy on 10/11/2017.
  */
@@ -38,22 +38,35 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
     private TextView dateView;
     private Button button;
     private int year, month, day;
+
+    EditText usuario;
+    EditText contraseña;
     EditText cedula;
     EditText nombre;
     EditText apellido;
+    EditText fecha;
+    EditText direccion;
     EditText telefono;
-    String fecha;
+    EditText correo;
+
+    String usua;
+    String contra;
     String ced;
     String nom;
     String apell;
     String tel;
+    String dir;
+    String fech;
+    String cor;
+
     Crud c;
 
-    String[] SPINNERLIST = {"Medico1", "Medico2", "Medico3"};
-    String[] SPINNERLISTS = {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
+
+    String[] TS= {"A+","A-","B+","B-","AB+","AB-","O+","O-"};
     MaterialBetterSpinner medC;
     MaterialBetterSpinner TipoS;
-    int positionP = -1;
+    int positionT = -1;
+    int positionM = -1;
 
     @Nullable
     @Override
@@ -69,24 +82,25 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
         super.onViewCreated(view, savedInstanceState);
 
         medC = (MaterialBetterSpinner) getView().findViewById(R.id.medicoc);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, SPINNERLIST);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, constantes.MEDICOSN);
 
         medC.setAdapter(arrayAdapter);
         medC.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                positionP = position;
+                positionM = position;
             }
         });
 
         TipoS = (MaterialBetterSpinner) getView().findViewById(R.id.tiposangre);
-        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, SPINNERLISTS);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, TS);
 
         TipoS.setAdapter(arrayAdapter1);
         TipoS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                positionP = position;
+                positionT = position;
+                Log.i("TIPOS",TS[positionT]);
             }
         });
 
@@ -130,16 +144,24 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
         dateView.setText(year+"-"+ mes +"-"+dia);
     }
     public void insertPatient() {
-        /*cedula = (EditText) getView().findViewById(R.id.cedulap);
+        usuario = (EditText) getView().findViewById(R.id.usuario);
+        usua = usuario.getText().toString().trim();
+        contraseña = (EditText) getView().findViewById(R.id.contraseña);
+        contra = contraseña.getText().toString().trim();
+        cedula = (EditText) getView().findViewById(R.id.cedulam);
         ced = cedula.getText().toString().trim();
-        nombre = (EditText) getView().findViewById(R.id.nombrep);
+        nombre = (EditText) getView().findViewById(R.id.nombrem);
         nom = nombre.getText().toString().trim();
-        apellido = (EditText) getView().findViewById(R.id.apellidop);
+        apellido = (EditText) getView().findViewById(R.id.apellidom);
         apell = apellido.getText().toString().trim();
-        telefono = (EditText) getView().findViewById(R.id.telefonop);
+        direccion = (EditText) getView().findViewById(R.id.direccionm);
+        dir = direccion.getText().toString().trim();
+        telefono = (EditText) getView().findViewById(R.id.telefonom);
         tel = telefono.getText().toString().trim();
-        fecha = dateView.getText().toString().trim();
-        if(ced.equals("") || nom.equals("") || apell.equals("") || tel.equals("") || fecha.equals("Fecha de Nacimiento") ){
+        correo = (EditText) getView().findViewById(R.id.correom);
+        cor = correo.getText().toString().trim();
+        fech = dateView.getText().toString().trim();
+        if(ced.equals("") || nom.equals("") || apell.equals("") || tel.equals("") || cor.equals("") || fech.equals("Fecha de Nacimiento") || positionM==-1 || positionT==-1){
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
             builder.setTitle("Alerta");
             builder.setMessage("Complete todos los campos");
@@ -152,16 +174,8 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
             builder.setMessage("¿Esta seguro de registrar este paciente?");
             builder.setPositiveButton("OK",new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogo1, int id) {
-
-                    paciente p = new paciente(ced,nom,apell,tel,fecha);
-                    String alert = c.LeerPaciente(p);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-                    builder.setTitle("Alerta");
-                    builder.setMessage(alert);
-                    builder.setPositiveButton("OK", null);
-                    builder.show();
-
-
+                    paciente p = new paciente(ced,nom,apell,fech,dir,tel,cor,TS[positionT],constantes.MEDICOS.get(positionM).getMed_id());
+                    c.InsertarPaciente(p);
                 }
             });
             builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -171,7 +185,8 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
             });
             builder.show();
 
-        }*/
+        }
+
     }
 
 }

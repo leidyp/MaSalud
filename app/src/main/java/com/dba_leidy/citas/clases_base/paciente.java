@@ -11,15 +11,13 @@ import java.util.Date;
 public class paciente extends persona {
 
     private int pac_id;
-    private int per_id;
     private String pac_tipo_sangre;
+    private int med_id_cabecera;
 
-
-    public paciente(int us_id, String per_cedula, String per_nombres, String per_apellidos, Date per_fechan, String per_direccion, String per_telefono, String per_correo, int pac_id, int per_id, String pac_tipo_sangre) {
-        super(us_id, per_cedula, per_nombres, per_apellidos, per_fechan, per_direccion, per_telefono, per_correo);
-        this.pac_id = pac_id;
-        this.per_id = per_id;
+    public paciente(String per_cedula, String per_nombres, String per_apellidos, String per_fechan, String per_direccion, String per_telefono, String per_correo, String pac_tipo_sangre, int med_cab) {
+        super(per_cedula, per_nombres, per_apellidos, per_fechan, per_direccion, per_telefono, per_correo);
         this.pac_tipo_sangre = pac_tipo_sangre;
+        this.med_id_cabecera = med_cab;
     }
 
     public int getPac_id() {
@@ -30,16 +28,6 @@ public class paciente extends persona {
         this.pac_id = pac_id;
     }
 
-    @Override
-    public int getPer_id() {
-        return per_id;
-    }
-
-    @Override
-    public void setPer_id(int per_id) {
-        this.per_id = per_id;
-    }
-
     public String getPac_tipo_sangre() {
         return pac_tipo_sangre;
     }
@@ -48,4 +36,11 @@ public class paciente extends persona {
         this.pac_tipo_sangre = pac_tipo_sangre;
     }
 
+    public int getMed_cab() {
+        return med_id_cabecera;
+    }
+
+    public void setMed_cab(int med_cab) {
+        this.med_id_cabecera = med_cab;
+    }
 }

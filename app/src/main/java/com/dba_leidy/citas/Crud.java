@@ -11,14 +11,19 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import com.dba_leidy.citas.clases_base.constantes;
+import com.dba_leidy.citas.clases_base.medico;
 import com.dba_leidy.citas.clases_base.paciente;
 import com.dba_leidy.citas.clases_base.usuario;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,11 +36,64 @@ import org.json.JSONObject;
 public class Crud {
     private Context context;
     boolean estado = false;
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public Crud(){}
 
     public Crud(Context context){
         this.context=context;
     }
+
+
+    public void InsertarPaciente(paciente p){
+
+        OkHttpClient client = new OkHttpClient();
+        Log.i("LOGIN: ", "iinicio");
+        String url = constantes.URLAPI+"paciente/agregar";
+        Gson gson = new Gson();
+        String json_paciente = gson.toJson(p);
+        Log.i("json p",json_paciente);
+
+        RequestBody body = RequestBody.create(JSON, json_paciente);
+        Request request = new Request.Builder()
+                .header("User-Agent", "OkHttp Headers.java")
+                .addHeader("Authorization", constantes.TOKEN)
+                .url(url)
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Log.i("LOGINR: ", ""+response.body().string());
+                    // Response response = client.newCall(request).execute();
+                    String json = response.body().string();
+                    Log.i("medicoinsertjson: ", json);
+                    try {
+                        JSONObject object = new JSONObject(json);
+
+                    }
+                    catch (JSONException e){
+
+                    }
+
+                }
+            }
+        });
+        /*String alert = c.LeerPaciente(p);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+        builder.setTitle("Alerta");
+        builder.setMessage(alert);
+        builder.setPositiveButton("OK", null);
+        builder.show();*/
+    }
+
 
     public void iniciarSesion(String usuario,String password) {
 
@@ -67,7 +125,7 @@ public class Crud {
                     try {
                         JSONObject object = new JSONObject(json);
                         if (object.getString("status").equals("success")){
-                            constantes.TOKEN = object.getString("status");
+                            constantes.TOKEN = object.getString("token");
                             Intent intent = new Intent(context, PerfilActivity.class);
                             //intent.putExtra("cedula",usuario.getUs_cedula());
                             intent.putExtra("nombre","");
@@ -88,7 +146,7 @@ public class Crud {
                                 }
                             });
                         }
-                    }
+                  }
                     catch(JSONException e){
 
                     }
@@ -97,7 +155,66 @@ public class Crud {
         });
         Log.i("LOGIN: ", "fin");
     }
+    public void LeerMedicos() {
 
+        OkHttpClient client = new OkHttpClient();
+        Log.i("medico: ", "iinicio");
+        String url = constantes.URLAPI + "medico/listar";
+        //String url = "https://raw.github.com/square/okhttp/master/README.md" ;
+        Log.i("medicoURL: ", url);
+        Request request = new Request.Builder()
+                .header("User-Agent", "OkHttp Headers.java")
+                .addHeader("Authorization", constantes.TOKEN)
+                .url(url)
+                .build();
+        Log.i("medicoR: ", "iinicio");
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Log.i("LOGINR: ", ""+response.body().string());
+                    // Response response = client.newCall(request).execute();
+                    String json = response.body().string();
+                    Log.i("medicojson: ", json);
+                    try {
+                        JSONObject object = new JSONObject(json);
+                        JSONArray medicos = object.getJSONArray("data");
+                        constantes.MEDICOSN = new String[medicos.length()];
+                        for (int i = 0; i < medicos.length(); i++) {
+                            JSONObject medi = medicos.getJSONObject(i);
+                            medico med=new medico();
+                            med.setMed_id(medi.getInt("med_id"));
+                            med.setPer_id(medi.getInt("per_id"));
+                            med.setPer_cedula(medi.getString("per_cedula"));
+                            med.setPer_nombres(medi.getString("per_nombres"));
+                            med.setPer_apellidos(medi.getString("per_apellidos"));
+                            med.setPer_fechan(medi.getString("per_fechan"));
+                            med.setPer_direccion(medi.getString("per_direccion"));
+                            med.setPer_telefono(medi.getString("per_telefono"));
+                            med.setPer_correo(medi.getString("per_correo"));
+                            constantes.MEDICOS.add(med);
+                            constantes.MEDICOSN[i]=med.getPer_nombres() +" "+ med.getPer_apellidos();
+                            Log.i("med",constantes.MEDICOSN[i]);
+
+                        }
+                    }
+                    catch (JSONException e){
+
+                    }
+
+                }
+            }
+        });
+        Log.i("LOGIN: ", "fin");
+    }
 
 
 

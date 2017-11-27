@@ -8,17 +8,18 @@ import java.util.Date;
 
 public class persona {
     private int per_id;
-    private int us_id;
     private String per_cedula;
     private String per_nombres;
     private String per_apellidos;
-    private Date per_fechan;
+    private String per_fechan;
     private String per_direccion;
     private String per_telefono;
     private String per_correo;
 
-    public persona(int us_id, String per_cedula, String per_nombres, String per_apellidos, Date per_fechan, String per_direccion, String per_telefono, String per_correo) {
-        this.us_id = us_id;
+    public persona(){}
+
+
+    public persona(String per_cedula, String per_nombres, String per_apellidos, String per_fechan, String per_direccion, String per_telefono, String per_correo) {
         this.per_cedula = per_cedula;
         this.per_nombres = per_nombres;
         this.per_apellidos = per_apellidos;
@@ -35,14 +36,6 @@ public class persona {
 
     public void setPer_id(int per_id) {
         this.per_id = per_id;
-    }
-
-    public int getUs_id() {
-        return us_id;
-    }
-
-    public void setUs_id(int us_id) {
-        this.us_id = us_id;
     }
 
     public String getPer_cedula() {
@@ -69,11 +62,11 @@ public class persona {
         this.per_apellidos = per_apellidos;
     }
 
-    public Date getPer_fechan() {
+    public String getPer_fechan() {
         return per_fechan;
     }
 
-    public void setPer_fechan(Date per_fechan) {
+    public void setPer_fechan(String per_fechan) {
         this.per_fechan = per_fechan;
     }
 

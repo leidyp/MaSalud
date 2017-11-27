@@ -1,8 +1,11 @@
 package com.dba_leidy.citas;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,21 +17,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.dba_leidy.citas.clases_base.constantes;
 import com.dba_leidy.citas.fragments.f_cita;
 import com.dba_leidy.citas.fragments.f_medico;
 import com.dba_leidy.citas.fragments.f_paciente;
 import com.dba_leidy.citas.fragments.f_perfil;
 import com.dba_leidy.citas.fragments.f_recepcionista;
+import com.dba_leidy.citas.Crud;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class PerfilActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
 
     TextView cedula;
     TextView nombre;
     int positionP = -1;
     private Bundle sesion;
+    Crud db = new Crud();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +53,7 @@ public class PerfilActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        db.LeerMedicos();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,8 +63,6 @@ public class PerfilActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
         // Obtengo el Bundle del Intent
         Log.i("cedula p",""+getIntent().getExtras().getInt("cedula"));
