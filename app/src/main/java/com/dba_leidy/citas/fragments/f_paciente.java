@@ -144,10 +144,6 @@ public class f_paciente extends Fragment implements CalendarDatePickerDialogFrag
         dateView.setText(year+"-"+ mes +"-"+dia);
     }
     public void insertPatient() {
-        usuario = (EditText) getView().findViewById(R.id.usuario);
-        usua = usuario.getText().toString().trim();
-        contraseña = (EditText) getView().findViewById(R.id.contraseña);
-        contra = contraseña.getText().toString().trim();
         cedula = (EditText) getView().findViewById(R.id.cedulam);
         ced = cedula.getText().toString().trim();
         nombre = (EditText) getView().findViewById(R.id.nombrem);

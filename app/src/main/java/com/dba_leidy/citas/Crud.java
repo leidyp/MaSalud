@@ -1,7 +1,6 @@
 package com.dba_leidy.citas;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -20,7 +19,7 @@ import okhttp3.Response;
 import com.dba_leidy.citas.clases_base.constantes;
 import com.dba_leidy.citas.clases_base.medico;
 import com.dba_leidy.citas.clases_base.paciente;
-import com.dba_leidy.citas.clases_base.usuario;
+import com.dba_leidy.citas.clases_base.recepcionista;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -42,58 +41,6 @@ public class Crud {
     public Crud(Context context){
         this.context=context;
     }
-
-
-    public void InsertarPaciente(paciente p){
-
-        OkHttpClient client = new OkHttpClient();
-        Log.i("LOGIN: ", "iinicio");
-        String url = constantes.URLAPI+"paciente/agregar";
-        Gson gson = new Gson();
-        String json_paciente = gson.toJson(p);
-        Log.i("json p",json_paciente);
-
-        RequestBody body = RequestBody.create(JSON, json_paciente);
-        Request request = new Request.Builder()
-                .header("User-Agent", "OkHttp Headers.java")
-                .addHeader("Authorization", constantes.TOKEN)
-                .url(url)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
-                } else {
-                    // Log.i("LOGINR: ", ""+response.body().string());
-                    // Response response = client.newCall(request).execute();
-                    String json = response.body().string();
-                    Log.i("medicoinsertjson: ", json);
-                    try {
-                        JSONObject object = new JSONObject(json);
-
-                    }
-                    catch (JSONException e){
-
-                    }
-
-                }
-            }
-        });
-        /*String alert = c.LeerPaciente(p);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setTitle("Alerta");
-        builder.setMessage(alert);
-        builder.setPositiveButton("OK", null);
-        builder.show();*/
-    }
-
 
     public void iniciarSesion(String usuario,String password) {
 
@@ -215,6 +162,132 @@ public class Crud {
         });
         Log.i("LOGIN: ", "fin");
     }
+
+    public void InsertarPaciente(paciente p){
+
+        OkHttpClient client = new OkHttpClient();
+        Log.i("LOGIN: ", "iinicio");
+        String url = constantes.URLAPI+"paciente/agregar";
+        Gson gson = new Gson();
+        String json_paciente = gson.toJson(p);
+        Log.i("json p",json_paciente);
+
+        RequestBody body = RequestBody.create(JSON, json_paciente);
+        Request request = new Request.Builder()
+                .header("User-Agent", "OkHttp Headers.java")
+                .addHeader("Authorization", constantes.TOKEN)
+                .url(url)
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Log.i("LOGINR: ", ""+response.body().string());
+                    // Response response = client.newCall(request).execute();
+                    final String json = response.body().string();
+                    Activity activity = (Activity) context;
+                    activity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            AlertDialog.Builder builder =
+                                    new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                            builder.setTitle("Alerta");
+                            builder.setMessage(json);
+                            builder.setPositiveButton("OK", null);
+                            builder.show();
+                        }
+                    });
+                    Log.i("pacienteinsertjson: ", json);
+                    try {
+                        JSONObject object = new JSONObject(json);
+
+                    }
+                    catch (JSONException e){
+
+                    }
+
+                }
+            }
+        });
+        /*String alert = c.LeerPaciente(p);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+        builder.setTitle("Alerta");
+        builder.setMessage(alert);
+        builder.setPositiveButton("OK", null);
+        builder.show();*/
+    }
+
+    public void InsertarRecepcionista(recepcionista r){
+
+        OkHttpClient client = new OkHttpClient();
+        Log.i("LOGIN: ", "iinicio");
+        String url = constantes.URLAPI+"recepcionista/agregar";
+        Gson gson = new Gson();
+        String json_recep = gson.toJson(r);
+        Log.i("json p",json_recep);
+
+        RequestBody body = RequestBody.create(JSON, json_recep);
+        Request request = new Request.Builder()
+                .header("User-Agent", "OkHttp Headers.java")
+                .addHeader("Authorization", constantes.TOKEN)
+                .url(url)
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    // Log.i("LOGINR: ", ""+response.body().string());
+                    // Response response = client.newCall(request).execute();
+                    final String json = response.body().string();
+                    Activity activity = (Activity) context;
+                    activity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            AlertDialog.Builder builder =
+                                    new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                            builder.setTitle("Alerta");
+                            builder.setMessage(json);
+                            builder.setPositiveButton("OK", null);
+                            builder.show();
+                        }
+                    });
+                    Log.i("recepinsertjson: ", json);
+                    try {
+                        JSONObject object = new JSONObject(json);
+
+                    }
+                    catch (JSONException e){
+
+                    }
+
+                }
+            }
+        });
+        /*String alert = c.LeerPaciente(p);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+        builder.setTitle("Alerta");
+        builder.setMessage(alert);
+        builder.setPositiveButton("OK", null);
+        builder.show();*/
+    }
+
+
+
+
 
 
 

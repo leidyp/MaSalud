@@ -10,13 +10,16 @@ public class medico extends persona {
 
     private int med_id;
     private String med_especialidad;
+    private String us_user;
+    private String us_password;
 
     public medico(){}
 
-    public medico(String per_cedula, String per_nombres, String per_apellidos, String per_fechan, String per_direccion, String per_telefono, String per_correo, int med_id, String med_especialidad) {
+    public medico(String per_cedula, String per_nombres, String per_apellidos, String per_fechan, String per_direccion, String per_telefono, String per_correo, String med_especialidad, String us_user, String us_password) {
         super(per_cedula, per_nombres, per_apellidos, per_fechan, per_direccion, per_telefono, per_correo);
-        this.med_id = med_id;
         this.med_especialidad = med_especialidad;
+        this.us_user = us_user;
+        this.us_password = us_password;
     }
 
     public int getMed_id() {
@@ -34,4 +37,20 @@ public class medico extends persona {
     public void setMed_especialidad(String med_especialidad) {
         this.med_especialidad = med_especialidad;
     }
+    public String getUs_user() {
+        return us_user;
+    }
+
+    public void setUs_user(String us_user) {
+        this.us_user = us_user;
+    }
+
+    public String getUs_password() {
+        return us_password;
+    }
+
+    public void setUs_password(String us_password) {
+        this.us_password = us_password;
+    }
+
 }

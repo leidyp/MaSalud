@@ -110,10 +110,11 @@
                     android:hint="@string/correo_p" />
             </android.support.design.widget.TextInputLayout>
             <Button
-                android:id="@+id/insert_usuario"
+                android:id="@+id/insert_recep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/buttonE"
+                android:onClick="insertRecepcionista"
                 android:theme="@style/RaisedButtonDark"
                 android:layout_marginTop="@dimen/fab_margin"
                 android:textColorHint="@color/EditTextColorWhite"

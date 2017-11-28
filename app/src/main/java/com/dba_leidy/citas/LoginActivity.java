@@ -1,6 +1,5 @@
 package com.dba_leidy.citas;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.dba_leidy.citas.clases_base.constantes;
-import com.dba_leidy.citas.clases_base.usuario;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -36,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("---> Bcountlo: ", ""+ constantes.URLAPI);
         String usua = user.getText().toString().trim();
         String contrasena = pass.getText().toString().trim();
-        usuario usuario;
+        //usuario usuario;
         if (!usua.equals("") && !contrasena.equals("")) {
             db.iniciarSesion(usua,contrasena);
         } else {
